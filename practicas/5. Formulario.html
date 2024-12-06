@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Validation Forms</title>
+	<style>
+
+		body{
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			width: 100%;
+			display: flex;
+			flex-flow: column wrap;
+		}
+
+		main{
+			height: 100vh;
+			width: 100%;
+			background: olivedrab;
+			display: flex;
+			place-content: center;
+			align-items: center;
+		}
+
+
+		form{
+			height: auto;
+			width: 450px;
+			border: 2px solid black;
+			padding: 20px;
+			display: flex;
+			flex-flow: column wrap;
+			justify-content: center;
+			gap: 10px;
+		}
+
+		.errorDiv{
+			display: flex;
+			flex-flow: column wrap;
+			justify-content: center;
+			gap: 1px;
+		}
+
+
+		.error1{
+			display: none;
+		}
+
+		.error1N{
+			color: white;
+			font-size: 15px;
+		}
+
+		#nombrePagina{
+			font-size: 15px;
+			font-weight: 500;
+			color: blue;
+		}
+
+	</style>
+</head>
+<body>
+
+	<main>
+		<form action="" id="formulario1">
+			<h2>To-do</h2>
+			<label for="valor1">Ingresa tus quehaceres</label>
+			<input type="text" name="valor1" id="valor1" placeholder="Agrega tus tareas">
+			<p id="error1" class="error1"></p>
+			<input type="submit" id="enviar1">
+			<div id="tareas"></div>
+		</form>
+	</main>
+	<main>
+		<form action="" id="formulario2">
+			<h2>Validación de información personal</h2>
+			<label for="nombre">Nombre</label>
+			<input type="text" name="nombre" id="nombre" placeholder="Ingresa tu nomre">
+			<label for="correo">Correo</label>
+			<input type="email" name="correo" id="correo" placeholder="Ingresa tu correo">
+			<label for="direccion">Dirección</label>
+			<input type="text" name="direccion" id="direccion" placeholder="Ingresa tu direccion">
+			<div class="errorDiv">
+				<p id="errorNombre" class="error1">Por favor ingrese</p>
+				<p id="errorCorreo" class="error1">Por favor ingrese</p>
+				<p id="errorDireccion" class="error1">Por favor ingrese</p>
+			</div>
+			<input type="submit">
+		</form>
+	</main>
+
+	<main>
+
+	<form action="" id="formulario3">
+		<h2>Formulario con validación</h2>
+		<p>Ingrese un nombre para su página mayor a 2 carácteres pero menos a 15, no use lengueje ofensivo y verifique que los compos estén completos antes de enviar el formulario</p>
+
+		<label for="valorNombre">Nombre de tu página <span id="nombrePagina"></span></label>
+		<input type="text" name="valorNombre" id="valorNombre" placeholder="Ingrese el nombre" maxlength="20">
+		<p id="errores" class="error1"></p>
+		<input type="submit">
+	</form>	
+
+
+	</main>
+
+	<script>
+	
+		var formulario1 = document.getElementById('formulario1').addEventListener('submit', function(event){
+			event.preventDefault();
+			var formulario1 = document.getElementById('formulario1');
+			var valor1 = document.getElementById('valor1').value.trim();
+			var error1 = document.getElementById('error1');
+			var tareas = document.getElementById('tareas');
+			if (valor1 === ''){
+				error1.classList = ('error1N');
+				error1.textContent = "• Por favor agrega contenido";
+			} else {
+				error1.classList = ('error1');
+				error1.textContent = "";
+				var crearDiv = document.createElement('div');
+				var crearInput = document.createElement('input');
+				crearInput.type = 'checkbox';
+				var crearLabel = document.createElement('label');
+				crearLabel.textContent = valor1;
+				crearDiv.appendChild(crearInput);
+				crearDiv.appendChild(crearLabel);
+				tareas.appendChild(crearDiv);
+			}
+			formulario1.reset();
+		});
+		var formulario2 = document.getElementById('formulario2').addEventListener('submit', function(event2){
+			event2.preventDefault();
+			var formulario2 = document.getElementById('formulario2');
+			var nombre = document.getElementById('nombre').value.trim();
+			var correo = document.getElementById('correo').value.trim();
+			var direccion = document.getElementById('direccion').value.trim();
+			var errorNombre = document.getElementById('errorNombre'); 
+			var errorCorreo = document.getElementById('errorCorreo'); 
+			var errorDireccion = document.getElementById('errorDireccion');
+			if (nombre === ''){
+				errorNombre.classList = ('error1N');
+				errorNombre.textContent = "Por favor ingrese su nombre";
+			} else {
+				errorNombre.classList = ('error1');
+				errorNombre.textContent = "";
+			}
+
+			if (correo === ''){
+				errorCorreo.classList = ('error1N');
+				errorCorreo.textContent = "Por favor ingrese su correo";
+			} else {
+				errorCorreo.classList = ('error1');
+				errorCorreo.textContent = "";
+			}
+
+
+			if (direccion === ''){
+				errorDireccion.classList = ('error1N');
+				errorDireccion.textContent = "Por favor ingrese su direccion";
+			} else {
+				errorDireccion.classList = ('error1');
+				errorDireccion.textContent = "";
+			}
+		});
+
+
+		var formulario3 = document.getElementById('formulario3').addEventListener('submit', function(event3){
+			event3.preventDefault();
+			var formulario3 = document.getElementById('formulario3');
+			var nombrePagina = document.getElementById('nombrePagina');
+			var valorNombre = document.getElementById('valorNombre').value.trim();
+			var errores = document.getElementById('errores');
+			var palabrasMin = 2;
+			var palabrasMax = 15;
+
+
+			var palabrasProhibidas = ['pene', 'caja'];
+			var palabrasProhibidasFalse = false;
+
+			for (var i = 0 ; i < palabrasProhibidas.length ; i++){
+				if(valorNombre === palabrasProhibidas[i]){
+					palabrasProhibidasFalse = true;
+					break;
+				}
+			}
+	
+
+			if (valorNombre === ''){
+				errores.classList = ('error1N');
+				errores.textContent = "Por favor ingrese un nombre";
+			} else if (valorNombre.length <= palabrasMin){
+				errores.classList = ('error1N');
+				errores.textContent = "Por favor ingrese un nombre con más de " + palabrasMin + " caracteres";
+			} else if (valorNombre.length > palabrasMax){
+				errores.classList = ('error1N');
+				errores.textContent = "Por favor ingrese un nombre con menos de " + palabrasMax + " caracteres";
+			} else if (palabrasProhibidasFalse){
+				errores.classList = ('error1N');
+				errores.textContent = "Por favor no uses se tipo de lenguaje" + " (" + valorNombre + ")";
+			}
+			else {
+				errores.classList = ('error1');
+				errores.textContent = "";
+				nombrePagina.textContent = valorNombre;	
+			}
+		});
+
+
+
+
+	</script>
+
+
+</body>
+</html>

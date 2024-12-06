@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animación On-View</title>
+    <style>
+        .space{
+            width: 100%;
+            height: 100vh;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="animate-onlook">
+        Este elemento se animará cuando sea visible
+    </div>
+
+    <div class="space"></div>
+
+
+
+    <div class="animate-onlook">
+        Este elemento se animará cuando sea visible
+    </div>
+
+    <script>
+        // Función para crear la animación onLook
+function createOnLookAnimation() {
+    // Seleccionamos todos los elementos que queremos animar
+    const elements = document.querySelectorAll('.animate-onlook');
+    
+    // Configuración del Intersection Observer
+    const options = {
+        root: null, // usa el viewport
+        rootMargin: '0px',
+        threshold: 0.5 // cuando el elemento es 50% visible
+    };
+    
+    // Callback que se ejecuta cuando el elemento es visible
+    const callback = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Añadimos la clase que activa la animación
+                entry.target.classList.add('scale-active');
+                // Opcional: dejar de observar después de animar
+                // observer.unobserve(entry.target);
+            } else {
+                // Opcional: remover la clase cuando no está visible
+                entry.target.classList.remove('scale-active');
+            }
+        });
+    };
+    
+    // Crear el observer
+    const observer = new IntersectionObserver(callback, options);
+    
+    // Observar cada elemento
+    elements.forEach(element => {
+        observer.observe(element);
+    });
+}
+
+// CSS necesario (añádelo a tu archivo CSS)
+const styles = `
+    .animate-onlook {
+        transform: scale(0.8);
+        opacity: 0;
+        transition: all 0.5s ease-out;
+    }
+
+    .scale-active {
+        transform: scale(1);
+        opacity: 1;
+    }
+`;
+
+// Crear elemento de estilo y añadirlo al head
+const styleSheet = document.createElement("style");
+styleSheet.textContent = styles;
+document.head.appendChild(styleSheet);
+
+// Inicializar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', createOnLookAnimation);
+    </script>
+</body>
+</html>

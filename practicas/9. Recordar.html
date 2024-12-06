@@ -1,0 +1,78 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Documentos recordar</title>
+	<style>
+		main{
+			display: flex;
+			flex-flow: row wrap;
+			gap: 10px;
+		}
+
+		.caja{
+			height: 100px;
+			width: 100px;
+			background: red;
+			cursor: pointer;
+		}
+
+		.nuevaCaja{
+			background: green;
+		}
+
+		.valor2{
+			text-align: center;
+			width: 25px;
+			height: 25px;
+			cursor: pointer;
+		}
+
+	</style>
+</head>
+<body>
+	<main>
+		<div class="caja"></div>
+		<div class="caja"></div>
+		<div class="caja"></div>
+		<div class="caja"></div>
+		<div class="caja"></div>
+	</main>
+
+
+	<form action="" id="sumar">
+		<input type="text" id="valor1" placeholder="Ingrese un valor">
+		<input type="submit" id="botonSumar" value="+" readonly class="valor2">
+		<input type="text" id="valor2" placeholder="Ingrese un valor">
+		<input type="text" id="mostrarResultado" readonly class="">
+	</form>
+
+
+
+	<script>
+
+		var caja = document.querySelectorAll('.caja');
+
+		function cambiarColor(){
+			this.classList.toggle('nuevaCaja');
+		}
+
+		caja.forEach(function(evento){
+			evento.addEventListener('mouseover', cambiarColor );
+		})
+
+		var sumar = document.getElementById('sumar').addEventListener('submit', function(event){
+			event.preventDefault();
+			var valor1 = parseFloat(document.getElementById('valor1').value);
+			var valor2 = parseFloat(document.getElementById('valor2').value);
+			var valor3 = valor1 + valor2;
+			var mostrarResultado = document.getElementById('mostrarResultado').value = valor3;
+		})
+
+
+
+	</script>
+	
+</body>
+</html>

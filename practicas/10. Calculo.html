@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Inversión</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+}
+
+input {
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#resultado {
+    margin-top: 20px;
+    font-weight: bold;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Inversión Mensual</h1>
+        <form id="calculator-form">
+            <label for="inversionInicial">Inversión Inicial:</label>
+            <input type="number" id="inversionInicial" placeholder="Ejemplo: 300000" required>
+            
+            <label for="tasaInteresMensual">Tasa de Interés Mensual (%):</label>
+            <input type="number" id="tasaInteresMensual" placeholder="Ejemplo: 0.9" required>
+            
+            <label for="inversionMensual">Inversión Mensual:</label>
+            <input type="number" id="inversionMensual" placeholder="Ejemplo: 300000" required>
+            
+            <label for="meses">Número de Meses:</label>
+            <input type="number" id="meses" placeholder="Ejemplo: 60" required>
+            
+            <button type="button" id="calcular">Calcular</button>
+        </form>
+        <div id="resultado"></div>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const calcularButton = document.getElementById("calcular");
+    const resultadoDiv = document.getElementById("resultado");
+
+    calcularButton.addEventListener("click", function () {
+        const inversionInicial = parseFloat(document.getElementById("inversionInicial").value);
+        const tasaInteresMensual = parseFloat(document.getElementById("tasaInteresMensual").value) / 100;
+        const inversionMensual = parseFloat(document.getElementById("inversionMensual").value);
+        const meses = parseInt(document.getElementById("meses").value);
+
+        if (isNaN(inversionInicial) || isNaN(tasaInteresMensual) || isNaN(inversionMensual) || isNaN(meses)) {
+            resultadoDiv.innerHTML = "Por favor, ingrese valores numéricos válidos en todos los campos.";
+        } else {
+            let saldoAcumulado = inversionInicial;
+
+            for (let i = 1; i <= meses; i++) {
+                const rendimientoMensual = saldoAcumulado * tasaInteresMensual;
+                saldoAcumulado += inversionMensual + rendimientoMensual;
+            }
+
+            resultadoDiv.innerHTML = `Saldo acumulado al final de ${meses} meses: $${saldoAcumulado.toFixed(2)}`;
+        }
+    });
+});
+    </script>
+</body>
+</html>

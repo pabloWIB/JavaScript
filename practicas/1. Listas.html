@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script>
+		
+		document.write('Creación de lista y bucle sencilla');
+		document.write('<br>');
+		document.write('<br>');
+
+		var grupo1 = ['Pablo' , 'Daniel', 'Camilo', 'Juan', 'Sebastián', 'Jorge'];
+
+		for (var i = 0 ; i < grupo1.length ; i++){
+			document.write(grupo1[i]);
+		}
+
+		document.write('<br>');
+		document.write('<br>');
+
+		document.write('Creación bucle sencilla con separación br');
+		document.write('<br>');
+		document.write('<br>');
+
+		for (var i = 0 ; i < grupo1.length ; i++){
+			document.write(grupo1[i] + '<br>');
+		}
+
+		document.write('<br>');
+		document.write('<br>');
+
+		document.write('Creación bucle sencilla con separación br y numeración');
+		document.write('<br>');
+		document.write('<br>');
+
+		for (var i = 0 ; i < grupo1.length ; i++){
+			document.write(i+1 + ' - ' + grupo1[i] + '<br>');
+		}
+
+		document.write('<br>');
+		document.write('<br>');
+
+		document.write('Creación lista y bucle for in sencillo');
+		document.write('<br>');
+		document.write('<br>');
+
+
+		var grupo2 = ['Isabela', 'Isa', 'Juana', 'Pedrita', 'Jorgita', 'Lolita'];
+
+		for (nombres in grupo2){
+			document.write(grupo2[nombres]);
+		}
+
+		document.write('<br>');
+		document.write('<br>');
+
+		document.write('Creación de bucle for in con br y numeración');
+		document.write('<br>');
+		document.write('<br>');
+
+		for (var a = 0 ; a<=0 ; a++){
+		}
+
+		for (nombres in grupo2){
+			document.write(a++ +' - ' +  grupo2[nombres] + '<br>');
+		}
+
+		document.write('<br>');
+		document.write('<br>');
+
+		document.write('Creación de bucle for in con br, numeración y uso de break');
+		document.write('<br>');
+		document.write('<br>');
+
+		for (var b = 0 ; b <= 0; b++ ){
+		}
+
+		for (nombres in grupo2){
+			document.write(b++ +' - ' +  grupo2[nombres] + '<br>');
+			if (grupo2[nombres] == 'Pedrita'){
+				break;
+			}
+		}
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

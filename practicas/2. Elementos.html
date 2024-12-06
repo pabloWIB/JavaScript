@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Documento</title>
+	<style>
+
+		.nuevaCaja{
+			height: 120px;
+			width: 120px;
+			background: red;
+			ruby-span: 15px;
+			display: grid;
+			place-content: center;
+		}
+
+		
+	</style>
+</head>
+<body>
+	<p>Aprimer el botón para crar una caja</p>
+	
+	<button id="botonCaja">Hola mundo</button>
+
+	<script>
+
+
+		var botonCaja = document.getElementById('botonCaja').addEventListener('click', function(event){
+			event.preventDefault();
+			var botonCaja = document.getElementById('botonCaja')
+			var crearCaja = document.createElement('button');
+			crearCaja.setAttribute('class', 'nuevaCaja');
+			var createTexto = document.createTextNode("Hola, soy una caja");
+			crearCaja.appendChild(createTexto);
+			botonCaja.appendChild(crearCaja);
+
+		})
+
+
+	</script>
+
+</body>
+</html>

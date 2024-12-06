@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		.cambiarTxt{
+			all: unset;
+			width: 250px;
+			height: 25px;
+			border: 1px solid red;
+			cursor: pointer;
+			text-align: center;
+			border-radius: 5px;
+			color: red;
+		}
+
+		.cambiarTxt2{
+			all: unset;
+			width: 250px;
+			height: 25px;
+			border: 1px solid green;
+			cursor: pointer;
+			text-align: center;
+			border-radius: 5px;
+			color: green;
+		}
+	</style>
+</head>
+<body>
+
+	<div>
+			<button id="cambiarTxt" class="cambiarTxt"></button>
+		</div>
+
+	<p>Son las : <span id="colocarFecha"></span></p>
+
+<br>
+
+	<button id="empezar">Empezar</button>
+	<button id="detener">Detener</button>
+
+	<script>
+
+
+		/*
+		function empezarSaludo (){
+			alert("Hola");
+		}
+		var intervalo = setInterval(empezarSaludo, 2000);
+		
+
+		var detener = document.getElementById('detener').addEventListener('click', function(){
+			clearTimeout(intervalo);
+		});
+
+*/
+
+
+		
+
+		function fechaCol (){
+			var colocarFecha = document.getElementById('colocarFecha');
+			var fecha = new Date();
+			var horas = fecha.getHours();
+			var minutos = fecha.getMinutes();
+			var segundos = fecha.getSeconds();
+			colocarFecha.textContent = horas + '' + minutos + '' + segundos;
+		}
+
+		var timeout = setTimeout(fechaCol, 0);
+		var interval = setInterval(fechaCol, 1000);
+		
+
+
+		var cambiarTxt = document.getElementById('cambiarTxt').textContent = ("Hola, soy un botón de color rojo");
+		var cambiarTxt = document.getElementById('cambiarTxt').addEventListener('click', function(){
+			function cambiarContent(){
+				var cambiarTxt = document.getElementById('cambiarTxt');
+				cambiarTxt.textContent = ("Hola, soy un botón de color verde");	
+				cambiarTxt.classList = ('cambiarTxt2');
+			}
+			setTimeout(cambiarContent, 1000);
+		});
+
+	</script>									
+</body>
+</html>

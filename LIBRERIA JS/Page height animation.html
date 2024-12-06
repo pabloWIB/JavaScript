@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Change Background</title>
+    <style>
+        body {
+            height: 2000px; /* Para permitir el desplazamiento */
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        #header, #header2 {
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        #header {
+            background-color: lightblue;
+        }
+
+        #header.BgColour {
+            background-color: darkblue;
+            color: white;
+        }
+
+        #header2 {
+            background-color: lightgreen;
+            top: 60px; /* Para que esté debajo del primer header */
+        }
+
+        #header2.BgColour3 {
+            background-color: darkgreen;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">Header 1</div>
+    <div id="header2">Header 2</div>
+
+    <script>
+        const header = document.getElementById('header');
+        const header2 = document.getElementById('header2');
+
+        function scrollValue() {
+            var scroll = window.scrollY;
+            if (scroll < 70) {
+                header.classList.remove('BgColour');
+                header2.classList.remove('BgColour3'); // Remove background color class from header2
+            } else {
+                header.classList.add('BgColour');
+                header2.classList.add('BgColour3'); // Add background color class to header2
+            }
+        }
+
+        window.addEventListener('scroll', scrollValue);
+    </script>
+</body>
+</html>

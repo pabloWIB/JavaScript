@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger Toggle Example</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        #burgerToggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001; /* Ensure it's above the overflow */
+            cursor: pointer;
+        }
+
+        .burger {
+            width: 30px;
+            height: 3px;
+            background-color: black;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+
+        #burgerToggle.burgerToggle .burger:nth-child(1) {
+            transform: rotate(-45deg) translate(-6px, 6px);
+        }
+
+        #burgerToggle.burgerToggle .burger:nth-child(2) {
+            opacity: 0;
+        }
+
+        #burgerToggle.burgerToggle .burger:nth-child(3) {
+            transform: rotate(45deg) translate(-6px, -6px);
+        }
+
+        #overflow {
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: fixed;
+            top: 0;
+            left: 100%;
+            transition: left 0.3s;
+            z-index: 999;
+        }
+
+        #overflow.overflowAction {
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="burgerToggle">
+        <div class="burger"></div>
+        <div class="burger"></div>
+        <div class="burger"></div>
+    </div>
+    <div id="overflow"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function() {
+            $("#burgerToggle").click(function(e) {
+                $("#burgerToggle").toggleClass("burgerToggle");
+                $("#overflow").toggleClass("overflowAction");
+            });
+        });
+    </script>
+</body>
+</html>

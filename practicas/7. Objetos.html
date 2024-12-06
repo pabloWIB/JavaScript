@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		main{
+			display: flex;
+			flex-flow: row wrap;
+			gap: 20px;
+		}
+		.antes{
+			height: 100px;
+			width: 100px;
+			background: red;
+			transition: .4s;
+		}
+		.despues{
+			background: oldlace;
+			transition: .4s;
+		}
+
+		.textoError{
+			display: none;
+		}
+
+		.textoErrorDisplay{
+			display: flex;
+			align-items: center;
+			gap: 5px;
+			flex-flow: row wrap;
+			font-size: 13px;
+			color: red;
+		}
+
+		.textoErrorDisplay2{
+			display: flex;
+			align-items: center;
+			gap: 5px;
+			flex-flow: row wrap;
+			font-size: 13px;
+			color: black;
+		}
+
+		.column{
+			display: flex;
+			flex-flow: column wrap;
+		}
+
+
+		.formularioInfo::placeholder{
+			color: blue;
+		}
+
+	</style>
+</head>
+<body>
+	<main>
+		<div class="antes"></div>
+		<div class="antes"></div>
+		<div class="antes"></div>
+	</main>
+	<br><br>
+	<form action="" id="formulario">
+		<input type="text" id="formularioInfo" class="formularioInfo" name="name" max="25" placeholder="Ingresa tu nombre" autocomplete="off">
+		<input type="submit">
+		<p id="textoError" class="textoError"></p>
+		<div id="cajaError" class="column"></div>
+	</form>
+	<p id="ponerFecha"></p>
+	<p id="usuariosDatos"></p>
+	<p id="userData"></p>
+	<script>
+		
+		var antes = document.querySelectorAll('.antes');
+		function cambiarColor(){
+			this.classList.toggle('despues');
+		}
+		antes.forEach(function(event1){
+			event1.addEventListener('mouseover', cambiarColor);
+		})
+		var formulario = document.getElementById('formulario').addEventListener('submit', function(event){
+			event.preventDefault();
+			var textoError = document.getElementById('textoError');
+			var cajaError = document.getElementById('cajaError');
+			var formulario = document.getElementById('formulario');
+			var formularioInfo = document.getElementById('formularioInfo').value.trim();
+			var minText = 2;
+			var maxText = 20;
+			var palabrasNo = ['foe', 'gay'];
+			var palabrasNoFalse = false;
+
+			for (var i = 0 ; i < palabrasNo.length; i++){
+				if (formularioInfo === palabrasNo[i]){
+					palabrasNoFalse = true; 
+					break;
+				}
+			}
+			if (formularioInfo === ''){
+				textoError.textContent = "Por favor agrega algo antes de enviar el formulario";
+				textoError.classList = ('textoErrorDisplay');
+			} else if (formularioInfo.length > maxText){
+				textoError.textContent = "Por favor agrega menos palabras";
+				textoError.classList = ('textoErrorDisplay');
+			} else if (formularioInfo.length <= minText){
+				textoError.textContent = "Por favor agrega más palabras";
+				textoError.classList = ('textoErrorDisplay');
+			} else if (palabrasNoFalse){
+				textoError.textContent = "Por favor no uses esas palabras";
+				textoError.classList = ('textoErrorDisplay');
+			} else {
+				textoError.textContent = '';
+				var crearDiv = document.createElement('div');
+				var crearInput = document.createElement('input');
+				crearInput.type = 'radio';
+				var crearSpan = document.createElement('span');
+				crearDiv.classList = ('textoErrorDisplay2');
+				crearSpan.textContent = formularioInfo;
+				crearDiv.appendChild(crearInput);
+				crearDiv.appendChild(crearSpan);
+				cajaError.appendChild(crearDiv);
+			}
+			formulario.reset();
+		});
+
+		 function actualizaFecha(){
+		 	var ponerFecha = document.getElementById('ponerFecha');
+		 	var fecha = new Date();
+		 	var fechaAño = fecha.getFullYear();
+		 	var fechaMes = fecha.getMonth();
+		 	var fechaDias = fecha.getDay();
+		 	var fechaHoras = fecha.getHours() -12;
+		 	var fechaMinutos = fecha.getMinutes();
+		 	var fechaSegundos = fecha.getSeconds();
+		 	var arrayDias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+		 	var arrayMes = [ 'Enero', 'Febreo', 'Marzo' ,'Mayo', 'Abril', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+		 	ponerFecha.textContent = ('Nos encontramos en el año: ' + fechaAño) + (' del mes: ' + arrayMes[fechaMes] + (' del día: ' + arrayDias[fechaDias]) + (' y son las: ' + fechaHoras) + (':' + fechaMinutos) + (':' + fechaSegundos));
+		 }
+
+		 var setOut = setTimeout(actualizaFecha, 0);
+		 var interval = setInterval(actualizaFecha, 1000);	
+
+
+
+		var usuariosDatos = document.getElementById('usuariosDatos');
+
+		
+
+		var infoPerro = {
+			raza : "Labrador",
+			edad : 2,
+			color : "Chocolate",
+
+			ladrar : function(){
+				console.log("Woof Woof")
+				usuariosDatos.textContent = `La raza del perro es ${this.raza}, tiene ${this.edad} años y es de color ${this.color}`;
+			}
+		}
+
+		infoPerro.ladrar();
+
+
+		var userData = document.getElementById('userData');
+
+		function crearPerfil(nombre, edad, medidaEdad, cedula, ciudad, pais, estadoCivil, direccion, correo, telefono){
+			this.nombre = nombre;
+			this.edad = edad;
+			this.medidaEdad = medidaEdad;
+			this.cedula = cedula;
+			this.ciudad = ciudad;
+			this.pais = pais;
+			this.estadoCivil = estadoCivil;
+			this.direccion = direccion;
+			this.correo = correo;
+			this.telefono = telefono; 
+			this.darInto = function(){ 
+				console.log(`El nombre es ${this.nombre}, tiene ${this.edad} ${this.medidaEdad} con cédula ${this.cedula}, es de la Ciudad de ${this.ciudad} ${this.pais}, con estado civil ${this.estadoCivil}, vive en la dirección ${this.direccion}, Correo ${this.correo}, Teléfono ${this.telefono}`);
+			}
+		}
+
+		const usuario1 = new crearPerfil("Pablo", 20, "años", 1002566898, "Manizales", "Colombia", "Soltero", "Cr 23 #75-55", "pablo369@gmail.com", 1221395271);
+
+		usuario1.darInto();
+		 
+
+	</script>
+</body>
+</html>

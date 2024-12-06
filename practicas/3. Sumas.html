@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		.botonSumarC{
+			text-align: center;
+			width: 15px;
+			height: 15px;
+			cursor: pointer;
+		}
+
+		.botonNum{
+			width: 55px;
+			height: 15px;
+			text-align: center;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<p id="introduccion"></p>
+
+	<form action="" id="formulario">
+		<input type="text" placeholder="VAL1" id="valor1" class="botonNum">
+		<span>+</span>
+		<input type="text" placeholder="VAL2" id="valor2" class="botonNum">
+		<input type="submit" value="+" readonly id="botonSumar" class="botonSumar">
+		<input type="text" placeholder="Total" readonly id="mostrarResultado" class="botonNum">
+	</form>
+
+	<script>
+		
+		var introduccion = document.getElementById('introduccion').textContent = "Hola, cumplo con la función de sumar 2 valores";
+
+		var formulario = document.getElementById('formulario').addEventListener('submit', function(event){
+
+			event.preventDefault();
+
+			var valor1 = parseFloat(document.getElementById('valor1').value); 
+			var valor2 = parseFloat(document.getElementById('valor2').value);
+			var valor3 = valor1 + valor2 
+			var mostrarResultado = document.getElementById('mostrarResultado').value = valor3;
+
+		});
+
+	</script>
+</body>
+</html>
